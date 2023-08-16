@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class CustomCard extends StatelessWidget {
   final String title;
-  final int percentage;
+  final double percentage;
   final VoidCallback tapHandle;
 
   const CustomCard({
@@ -14,6 +14,7 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int percent = percentage.toInt();
     return GestureDetector(
         onTap: tapHandle,
         child: Card(

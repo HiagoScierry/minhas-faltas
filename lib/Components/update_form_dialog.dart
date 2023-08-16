@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
-import '../Provider/cart_item.dart';
+import 'package:minhasfaltas/Provider/cart_item.dart';
 import 'package:provider/provider.dart';
 
 import '../Model/card_item.dart';
@@ -19,9 +19,14 @@ class _UpdateFormDialogState extends State<UpdateFormDialog> {
   int currentAbsences = 0;
 
   @override
+  void initState() {
+    super.initState();
+    currentAbsences = widget.cardItem.faults;
+  }
+
+  @override
   Widget build(BuildContext context) {
     var cartItemProvider = Provider.of<CartItemProvider>(context);
-    currentAbsences = widget.cardItem.faults;
 
     return AlertDialog(
       title: Row(
@@ -41,8 +46,8 @@ class _UpdateFormDialogState extends State<UpdateFormDialog> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Faltas Anteriores: ${widget.cardItem.hours ~/ 10}'),
-          const SizedBox(height: 16),
+          Text('Disciplina: ${widget.cardItem.title}'),
+          Text('Qtd : ${widget.cardItem.faults}'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -80,13 +85,7 @@ class _UpdateFormDialogState extends State<UpdateFormDialog> {
       actions: [
         ElevatedButton(
           onPressed: () {
-            cartItemProvider.updateItem(
-              CardItem(
-                title: widget.cardItem.title,
-                hours: widget.cardItem.hours,
-                faults: currentAbsences,
-              ),
-            );
+            cartItemProvider.updateItem(widget.cardItem, currentAbsences);
             Navigator.pop(context);
           },
           child: const Text('Salvar'),

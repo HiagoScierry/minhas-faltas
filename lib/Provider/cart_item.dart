@@ -18,9 +18,13 @@ class CartItemProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateItem(CardItem item) {
+  void updateItem(CardItem item, int newFaults) {
     int index = _items.indexWhere((element) => element.title == item.title);
-    _items[index] = item;
+    _items[index] = CardItem(
+      title: item.title,
+      hours: item.hours,
+      faults: newFaults,
+    );
     notifyListeners();
   }
 

@@ -22,9 +22,11 @@ class CardGrid extends StatelessWidget {
       ),
       itemCount: cardItems.length,
       itemBuilder: (context, index) {
+        double percentage =
+            (cardItems[index].faults / cardItems[index].hours) * 100;
         return CustomCard(
           title: cardItems[index].title,
-          percentage: cardItems[index].hours,
+          percentage: percentage,
           tapHandle: () {
             // Show the AlertDialog with TextField
             showDialog(
