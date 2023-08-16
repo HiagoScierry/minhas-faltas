@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../Interfaces/card_item.dart';
+import '../Model/card_item.dart';
 
 class UpdateFormDialog extends StatefulWidget {
   final CardItem cardItem;

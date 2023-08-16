@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class CardItem {
   final String title;
   final int hours;
@@ -13,5 +15,15 @@ class CardItem {
     if (faults > 0) {
       faults - 1;
     }
+  }
+
+  static fromJson(String data) {
+    //string to json
+    Map<String, dynamic> jsonMap = json.decode(data);
+
+    return CardItem(
+      title: jsonMap[''],
+      hours: jsonMap['hours'],
+    );
   }
 }

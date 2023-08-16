@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-import '../Interfaces/card_item.dart';
+import '../Model/card_item.dart';
 
 import 'update_form_dialog.dart';
 import 'custom_card.dart';

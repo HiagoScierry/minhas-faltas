@@ -2,45 +2,62 @@ import 'package:flutter/material.dart';
 
 import '../Components/card_grid.dart';
 import '../Components/add_form_dialog.dart';
+import '../Components/info_dialog.dart';
 
-import '../Interfaces/card_item.dart';
+import '../Model/card_item.dart';
 
 class MyHomePage extends StatelessWidget {
-  final List<CardItem> cardItems = [
-    CardItem(title: 'Vetores e Geometria Analítica', hours: 60),
-    CardItem(title: 'Tópicos em Programação 2', hours: 30),
-    CardItem(title: 'Segurança e Auditoria de Sistemas', hours: 60),
-    CardItem(title: 'Interface Humano Computador', hours: 60),
-    CardItem(title: 'Metodologia de Pesquisa', hours: 30),
-    CardItem(title: 'Projetos de Sistemas de Software', hours: 60),
-
-    // ... adicione mais itens aqui
-  ];
+  final List<CardItem> cardItems = [];
 
   MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Suas Matérias'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return const AddFormDialog();
+        appBar: AppBar(
+          title: const Text('Suas Matérias'),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const InfoDialog();
+                    },
+                  );
                 },
-              );
-            },
-          ),
-        ],
-      ),
-      body: Center(
-        child: CardGrid(cardItems: cardItems),
-      ),
-    );
+                icon: const Icon(Icons.info)),
+            IconButton(
+              icon: const Icon(Icons.add),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return const AddFormDialog();
+                  },
+                );
+              },
+            ),
+          ],
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: CardGrid(
+                cardItems: cardItems,
+              ),
+            ),
+            Container(
+              child: const Align(
+                alignment: Alignment.bottomCenter,
+                child: Text('Desenvolvido por : Hiago Moreira',
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+            ),
+          ],
+        ));
   }
 }
