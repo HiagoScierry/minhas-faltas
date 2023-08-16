@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:minhasfaltas/Provider/cart_item.dart';
+import 'package:provider/provider.dart';
 
 import '../Components/card_grid.dart';
 import '../Components/add_form_dialog.dart';
@@ -7,12 +9,14 @@ import '../Components/info_dialog.dart';
 import '../Model/card_item.dart';
 
 class MyHomePage extends StatelessWidget {
-  final List<CardItem> cardItems = [];
+  List<CardItem> cardItems = [];
 
   MyHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    cardItems = Provider.of<CartItemProvider>(context).items;
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Suas Matérias'),

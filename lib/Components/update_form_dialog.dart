@@ -1,6 +1,8 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import '../Provider/cart_item.dart';
+import 'package:provider/provider.dart';
 
 import '../Model/card_item.dart';
 
@@ -17,15 +19,24 @@ class _UpdateFormDialogState extends State<UpdateFormDialog> {
   int currentAbsences = 0;
 
   @override
-  void initState() {
-    super.initState();
-    currentAbsences = widget.cardItem.hours ~/ 10;
-  }
-
-  @override
   Widget build(BuildContext context) {
+    var cartItemProvider = Provider.of<CartItemProvider>(context);
+    currentAbsences = widget.cardItem.faults;
+
     return AlertDialog(
-      title: Text(widget.cardItem.title),
+      title: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text('Atualizar Faltas'),
+          IconButton(
+              onPressed: () {
+                cartItemProvider.removeItem(widget.cardItem);
+                Navigator.pop(context);
+              },
+              icon: const Icon(Icons.delete))
+        ],
+      ),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +80,13 @@ class _UpdateFormDialogState extends State<UpdateFormDialog> {
       actions: [
         ElevatedButton(
           onPressed: () {
-            // Implement actions here, e.g., save the current absences
+            cartItemProvider.updateItem(
+              CardItem(
+                title: widget.cardItem.title,
+                hours: widget.cardItem.hours,
+                faults: currentAbsences,
+              ),
+            );
             Navigator.pop(context);
           },
           child: const Text('Salvar'),

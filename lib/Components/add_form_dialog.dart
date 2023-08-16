@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../Provider/cart_item.dart';
+import '../Model/card_item.dart';
 
 class AddFormDialog extends StatefulWidget {
   const AddFormDialog({super.key});
@@ -18,23 +21,10 @@ class _AddFormDialogState extends State<AddFormDialog> {
     super.dispose();
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Perform your form submission here
-      final subjectName = _nameController.text;
-      final subjectHours = _selectedHours;
-
-      // You can process the data or show a success message
-      print('Subject Name: $subjectName');
-      print('Subject Hours: $subjectHours');
-
-      // Close the dialog
-      Navigator.pop(context);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    final cartItemProvider = Provider.of<CartItemProvider>(context);
+
     return AlertDialog(
       title: const Text('Adicionar Nova Materia'),
       content: Form(
@@ -79,7 +69,18 @@ class _AddFormDialogState extends State<AddFormDialog> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: _submitForm,
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    cartItemProvider.addItem(
+                      CardItem(
+                        title: _nameController.text,
+                        hours: int.parse(_selectedHours),
+                        faults: 0,
+                      ),
+                    );
+                    Navigator.pop(context);
+                  }
+                },
                 child: const Text('Adicionar'),
               ),
             ),

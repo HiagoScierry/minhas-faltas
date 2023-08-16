@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Model/card_item.dart';
 
-class CardItemsProvider extends ChangeNotifier {
-  List<CardItem> _cardItems = [];
+class CartItemProvider extends ChangeNotifier {
+  final List<CardItem> _items = [];
 
-  List<CardItem> get cardItems => _cardItems;
+  List<CardItem> get items => _items;
 
-  CardItemsProvider() {
-    _loadCardItems();
-  }
-
-  void _loadCardItems() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? cardItemsJson = prefs.getStringList('cardItems');
-
+  void addItem(CardItem item) {
+    _items.add(item);
     notifyListeners();
   }
 
-  void saveCardItems() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  void removeItem(CardItem item) {
+    int index = _items.indexWhere((element) => element.title == item.title);
+    _items.removeAt(index);
+    notifyListeners();
   }
+
+  void updateItem(CardItem item) {
+    int index = _items.indexWhere((element) => element.title == item.title);
+    _items[index] = item;
+    notifyListeners();
+  }
+
+  // Implemente outros métodos conforme necessário, como atualizar e excluir tarefas.
 }

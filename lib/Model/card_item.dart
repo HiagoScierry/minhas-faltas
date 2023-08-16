@@ -3,9 +3,9 @@ import 'dart:convert';
 class CardItem {
   final String title;
   final int hours;
-  final int faults = 0;
+  final int faults;
 
-  CardItem({required this.title, required this.hours});
+  CardItem({required this.title, required this.hours, required this.faults});
 
   addFaults() {
     faults + 1;
@@ -22,8 +22,9 @@ class CardItem {
     Map<String, dynamic> jsonMap = json.decode(data);
 
     return CardItem(
-      title: jsonMap[''],
+      title: jsonMap['title'],
       hours: jsonMap['hours'],
+      faults: jsonMap['faults'],
     );
   }
 }
