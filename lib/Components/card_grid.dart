@@ -1,15 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+import '../Interfaces/card_item.dart';
 import 'custom_card.dart';
-
-class CardItem {
-  final String title;
-  final int hours;
-  final int faults = 0;
-
-  CardItem({required this.title, required this.hours});
-}
 
 class CardGrid extends StatelessWidget {
   final List<CardItem> cardItems;
