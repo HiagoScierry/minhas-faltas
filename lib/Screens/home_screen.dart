@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:minhasfaltas/Provider/cart_item.dart';
 import 'package:provider/provider.dart';
@@ -51,15 +53,13 @@ class MyHomePage extends StatelessWidget {
                 cardItems: cardItems,
               ),
             ),
-            Container(
-              child: const Align(
-                alignment: Alignment.bottomCenter,
-                child: Text('Desenvolvido por : Hiago Moreira',
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
+            const Align(
+              alignment: Alignment.bottomCenter,
+              child: Text('Desenvolvido por : Hiago Moreira',
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  )),
             ),
           ],
         ));
