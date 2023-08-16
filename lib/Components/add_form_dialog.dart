@@ -14,6 +14,7 @@ class _AddFormDialogState extends State<AddFormDialog> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   String _selectedHours = '30';
+  List<String> listHours = ['30', '45', '60', '75', '90', '120'];
 
   @override
   void dispose() {
@@ -54,7 +55,7 @@ class _AddFormDialogState extends State<AddFormDialog> {
                   _selectedHours = newValue!;
                 });
               },
-              items: ['30', '60', '90'].map((hours) {
+              items: listHours.map((hours) {
                 return DropdownMenuItem<String>(
                   value: hours,
                   child: Text('$hours Horas'),

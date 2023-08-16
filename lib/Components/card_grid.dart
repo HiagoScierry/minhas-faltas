@@ -27,6 +27,8 @@ class CardGrid extends StatelessWidget {
         return CustomCard(
           title: cardItems[index].title,
           percentage: percentage,
+          hours: cardItems[index].hours,
+          faults: cardItems[index].faults,
           tapHandle: () {
             // Show the AlertDialog with TextField
             showDialog(
